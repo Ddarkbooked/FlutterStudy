@@ -13,14 +13,15 @@ class MyApp extends StatelessWidget {
       title: 'Personal Expenses',
       theme: ThemeData(
           primarySwatch: Colors.indigo,
-          accentColor: Colors.indigo[300],
+          accentColor: Colors.indigo[100],
           fontFamily: 'Quicksand',
           textTheme: ThemeData.light().textTheme.copyWith(
-                  title: TextStyle(
+              title: TextStyle(
                 fontFamily: 'OpenSans',
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
-              )),
+              ),
+              button: TextStyle(color: Colors.indigo)),
           appBarTheme: AppBarTheme(
             textTheme: ThemeData.light().textTheme.copyWith(
                   title: TextStyle(
@@ -66,12 +67,19 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void _startAddNewTransaction(BuildContext ctx) {
+  void _startAddNewTransaction() {
     showModalBottomSheet(
-      context: ctx,
+      backgroundColor: Colors.white,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(24.0))),
+      context: context,
       builder: (_) {
-        return GestureDetector(
-          child: NewTransaction(_addNewTransaction),
+        return Wrap(
+          children: <Widget>[
+            GestureDetector(
+              child: NewTransaction(_addNewTransaction),
+            ),
+          ],
         );
       },
     );
@@ -87,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: () => _startAddNewTransaction(context),
+            onPressed: _startAddNewTransaction,
           )
         ],
       ),
@@ -101,8 +109,11 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () => _startAddNewTransaction(context),
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+        onPressed: _startAddNewTransaction,
       ),
     );
   }
